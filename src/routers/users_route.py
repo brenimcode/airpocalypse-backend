@@ -12,7 +12,7 @@ from src.schemas.user import (
 )
 
 router = APIRouter(
-    prefix="/inscritos",
+    prefix="/Subscriber",
     tags=["Inscritos"]
 )
 
@@ -52,20 +52,20 @@ def list_inscritos(
 
 
 @router.get(
-    "/{inscrito_id}",
+    "/{subscriber_id}",
     response_model=InscritoResponse,
     summary="Buscar inscrito por ID"
 )
 def get_inscrito(
-        inscrito_id: int,
+        subscriber_id: int,
         db: Session = Depends(get_db)
 ):
-    inscrito = InscritoService.get_by_id(db, inscrito_id)
+    inscrito = InscritoService.get_by_id(db, subscriber_id)
 
     if not inscrito:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Inscrito com ID {inscrito_id} não encontrado"
+            detail=f"Inscrito com ID {subscriber_id} não encontrado"
         )
 
     return inscrito
@@ -92,41 +92,41 @@ def get_inscrito_by_email(
 
 
 @router.put(
-    "/{inscrito_id}",
+    "/{subscriber_id}",
     response_model=InscritoResponse,
     summary="Atualizar inscrito"
 )
 def update_inscrito(
-        inscrito_id: int,
+        subscriber_id: int,
         inscrito_data: InscritoUpdate,
         db: Session = Depends(get_db)
 ):
-    inscrito = InscritoService.update(db, inscrito_id, inscrito_data)
+    inscrito = InscritoService.update(db, subscriber_id, inscrito_data)
 
     if not inscrito:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Inscrito com ID {inscrito_id} não encontrado"
+            detail=f"Inscrito com ID {subscriber_id} não encontrado"
         )
 
     return inscrito
 
 
 @router.delete(
-    "/{inscrito_id}",
+    "/{subscriber_id}",
     status_code=status.HTTP_204_NO_CONTENT,
     summary="Deletar inscrito"
 )
 def delete_inscrito(
-        inscrito_id: int,
+        subscriber_id: int,
         db: Session = Depends(get_db)
 ):
-    success = InscritoService.delete(db, inscrito_id)
+    success = InscritoService.delete(db, subscriber_id)
 
     if not success:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Inscrito com ID {inscrito_id} não encontrado"
+            detail=f"Inscrito com ID {subscriber_id} não encontrado"
         )
 
     return None

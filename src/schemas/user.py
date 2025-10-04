@@ -5,7 +5,7 @@ from typing import Optional
 class InscritoCreate(BaseModel):
     nome: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    origem: Optional[str] = Field("chatbot", max_length=50)
+    escopo: Optional[str] = Field("Indefinido", max_length=50)
 
 class InscritoUpdate(BaseModel):
     nome: Optional[str] = Field(None, min_length=2, max_length=100)
@@ -15,7 +15,7 @@ class InscritoResponse(BaseModel):
     id: int
     nome: str
     email: str
-    origem: Optional[str]
+    escopo: Optional[str]
     created_at: datetime
     updated_at: Optional[datetime]
 

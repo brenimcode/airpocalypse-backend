@@ -1,13 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from core.config import settings
+
+from src.core.config import settings
 
 DATABASE_URL = settings.DATABASE_URL
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)  #
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
 
 def get_db():
     db = SessionLocal()
@@ -16,7 +18,7 @@ def get_db():
     finally:
         db.close()
 
-def init_db():
-    from models.inscrito import Inscrito
 
+def init_db():
+    from src.models.subscriber import Inscrito
     Base.metadata.create_all(bind=engine)

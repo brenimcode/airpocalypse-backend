@@ -1,15 +1,35 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+from src.core.config import get_settings
+from src.core.db import init_db
+from src.routers import users_router
+
+settings = get_settings()
 
 
-api = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    print("Iniciando...")
+    init_db()
+    print("Conectado!")
+    yield
+    print("Encerrando...")
 
 
-@api.get('/')
-def read_root():
-    return {"Hello": "World"}
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version="1.0.0",
+    description="API REST para gerenciamento de inscritos do chatbot",
+    lifespan=lifespan
+)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-if __name__ == '__main__':
-    import uvicorn
-    port = 8000
-    uvicorn.run(api, host="0.0.0.0", port=port)
+app.include_router(users_router, prefix=settings.API_V1_STR)

@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ### Construir imagem
 ```bash
-docker build -f -t airpocalypse-backend .
+docker build -t airpocalypse-backend .
 ```
 
 ### Executar

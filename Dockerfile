@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # Expõe a porta
-EXPOSE 8000
+EXPOSE 8080
 
-# Comando padrão (pode ser sobrescrito no docker-compose)
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Comando padrão roda a main apenas:
+CMD ["python", "-u", "src/main.py"] 

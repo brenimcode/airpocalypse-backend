@@ -36,3 +36,4 @@ docker-compose.override.yml
 /.pdm.lock
 /.python-version
 /.ipynb_checkpoints/
+/N8N

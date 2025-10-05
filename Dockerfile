@@ -18,5 +18,5 @@ COPY . .
 # Expõe a porta
 EXPOSE 8080
 
-# Comando padrão roda a main apenas:
-CMD ["python", "-u", "src/main.py", "--log-level", "debug"]
+# Comando padrão: cria as tabelas e depois roda a aplicação
+CMD ["/bin/sh", "-c", "python src/create_table.py && python -u src/main.py --log-level debug"]

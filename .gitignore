@@ -37,3 +37,4 @@ docker-compose.override.yml
 /.python-version
 /.ipynb_checkpoints/
 /N8N
+/.venv/

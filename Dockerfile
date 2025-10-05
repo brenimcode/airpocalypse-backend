@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8080
 
 # Comando padrão roda a main apenas:
-CMD ["python", "-u", "src/main.py"] 
+CMD ["python", "-u", "src/main.py", "--log-level", "debug"]
